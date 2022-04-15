@@ -1,0 +1,24 @@
+CC = gcc
+OPTIONS = -Wall -W -std=c89 -O3 -pedantic   
+CFLAGS = -g -O2 -Wall -W -std=c89 -O3 -pedantic `pkg-config --cflags MLV`                                                                     
+LDFLAGS = `pkg-config --libs-only-other --libs-only-L MLV`                                                                                    
+LDLIBS = `pkg-config --libs-only-l MLV`
+
+main : main.o grille.o algo.o affichage.o
+	$(CC) $(CFLAGS) $(LDFLAGS) main.o grille.o algo.o affichage.o $(LDLIBS) -o main
+
+main.o : main.c type.h grille.h
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $(LDLIBS) main.c 
+
+grille.o : grille.c type.h 
+	$(CC) $(OPTIONS) -c grille.c
+
+algo.o : algo.c type.h
+	$(CC) $(CFLAGS) $(LDFLAGS) algo.c $(LDLIBS) -c
+
+affichage.o : affichage.c 
+		$(CC) $(CFLAGS) $(LDFLAGS) affichage.c $(LDLIBS) -c
+
+clean :
+	rm -rf *.o *~ main
+
