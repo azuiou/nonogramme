@@ -74,7 +74,6 @@ void recuperation_donnees(char fic[50], int t[LIGNE][COL][X], int*cases, int *co
             if(i<*col){
                 t[0][i+1][j] = tmp;/*stock les valeurs des colonnes*/
                 *cases +=tmp;/*compte le nombre de cases à remplir dans la grille*/
-                printf(" cases : %d \n",*cases);
             }
             else
                 t[i+1-*col][0][j] = tmp;/*stock les valeurs des lignes*/

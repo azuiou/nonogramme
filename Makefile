@@ -1,6 +1,6 @@
 CC = gcc
-OPTIONS = -Wall -W -std=c89 -O3 -pedantic   
-CFLAGS = -g -O2 -Wall -W -std=c89 -O3 -pedantic `pkg-config --cflags MLV`                                                                     
+OPTIONS = -Wall -W -O3 -pedantic   
+CFLAGS = -g -O2 -Wall -W -O3 -pedantic `pkg-config --cflags MLV`                                                                     
 LDFLAGS = `pkg-config --libs-only-other --libs-only-L MLV`                                                                                    
 LDLIBS = `pkg-config --libs-only-l MLV`
 
