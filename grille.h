@@ -13,6 +13,9 @@ void affiche_grille(int t[LIGNE][COL][X], plateau plateau);
 /*Rempli les donnees necessaires à la resolution pat l'utilisateur*/
 void recuperation_donnees(char fic[50], int t[LIGNE][COL][X], int*cases, int *col, int*ligne);
 
+/*verifie si la solution est potentiellement fausse retourne 1 -> ok 0 -> pas bon*/
+int verif(int t[LIGNE][COL][X], plateau plateau);
+
 
 
 #endif

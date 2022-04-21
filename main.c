@@ -28,17 +28,31 @@ int main(int argc, char**argv){
     printf(" plateau.col : %d \n",plateau.col);
     printf("cases remplies : %d\n", cases_decouverte);
     remplie_depart(plateau.grille, plateau, interrupteur, &cases_decouverte);
+    remplie_partiel(plateau.grille, plateau, interrupteur, &cases_decouverte);
     bord_fini(plateau.grille,plateau,interrupteur, &cases_decouverte);
     printf("sus : %d\n", plateau.grille[0][2][0]);
     printf("cases remplies : %d\n", cases_decouverte);
-    while( cases_decouverte < plateau.cases && etape < 1){
-        barre(plateau.grille, plateau, interrupteur);
-        /*complete(plateau.grille, plateau, interrupteur, &cases_decouverte);*/
+    while( cases_decouverte < plateau.cases && etape < 8){
+        printf("decouvert1 : %d\n", cases_decouverte);
+        printf("a decouvrir : %d \n", plateau.cases);
+        barre(plateau.grille, plateau);
+        complete(plateau.grille, plateau, interrupteur, &cases_decouverte);
+        printf("decouvert2 : %d\n", cases_decouverte);
         bord_fini(plateau.grille,plateau,interrupteur, &cases_decouverte);
+        printf("decouvert3 : %d\n", cases_decouverte);
         etape++;
     }
+    printf("decouvert4 : %d\n", cases_decouverte);
+    printf("a decouvrir : %d \n", plateau.cases);
+    printf("%d etapes pour trouver la solution\n", etape);
     affiche_dessin(plateau.grille, plateau.col, plateau.ligne);
     printf("FINI\n");
+    if (verif( plateau.grille, plateau) == 1){
+        printf("LA RESOLUTION EST BONNE\n");
+    }
+    else{
+        printf("LA RESOLUTION EST MAUVAISE\n");
+    }
     MLV_wait_seconds(100);
     MLV_free_window();
     exit (EXIT_SUCCESS);        

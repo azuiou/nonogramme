@@ -84,4 +84,55 @@ void recuperation_donnees(char fic[50], int t[LIGNE][COL][X], int*cases, int *co
 }
 
 
-
+int verif(int t[LIGNE][COL][X], plateau plateau){
+    int i = 1, acc, acc2 ,j, longueur, continuer = 1;
+    /*lignes*/
+    while( i <= plateau.ligne && continuer == 1){
+        j = 0;
+        acc = 0;
+        acc2 = 0;
+        longueur = 0;
+        while(t[i][0][longueur] != 0)
+            longueur++;
+        while( j < longueur ){
+            acc += t[i][0][j];
+            j++;
+        }
+        j = 1;
+        while(j <= plateau.col){
+            if(t[i][j][0] == 1)
+                acc2 ++;
+            j++;
+        }
+        if( acc != acc2){
+            continuer = 0;
+            return 0;
+        }
+        i++;
+    }
+    /*colonnes*/
+    while( i <= plateau.col && continuer == 1){
+        j = 0;
+        acc = 0;
+        acc2 = 0;
+        longueur = 0;
+        while(t[0][i][longueur] != 0)
+            longueur++;
+        while( j < longueur ){
+            acc += t[0][i][j];
+            j++;
+        }
+        j = 1;
+        while(j <= plateau.ligne){
+            if(t[j][i][0] == 1)
+                acc2 ++;
+            j++;
+        }
+        if( acc != acc2){
+            continuer = 0;
+            return 0;
+        }
+        i++;
+    }
+    return 1;
+}
