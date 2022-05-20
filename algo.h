@@ -1,5 +1,6 @@
 #ifndef _ALGO_H_
 #define _ALGO_H_
+#include "type.h"
 
 void remplie_depart(int t[LIGNE][COL][X], plateau plateau, int interrupteur, int * cases);
 

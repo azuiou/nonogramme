@@ -4,6 +4,8 @@
 #include "algo.h"
 #include "affichage.h"
 #include <MLV/MLV_all.h>
+#include "sauvegarde.h"
+#include <assert.h>
 
 
 void usage(char*nom){
@@ -14,11 +16,14 @@ int main(int argc, char**argv){
     int etape = 0, interrupteur;
     int cases_decouverte = 0;
     plateau plateau;
+    char * save;
+    int choix;
     /*test nombre d'arguments*/
     if (argc!=2){
         usage(argv[0]);
         exit (EXIT_FAILURE);
     }
+    save = malloc(128 * sizeof(char));
     interrupteur = case_par_case();
     MLV_create_window("Solveur","Solveur", WINDOW_LENGHT, WINDOW_HEIGHT);
     init_plateau(plateau.grille);
@@ -36,7 +41,7 @@ int main(int argc, char**argv){
         printf("decouvert1 : %d\n", cases_decouverte);
         printf("a decouvrir : %d \n", plateau.cases);
         barre(plateau.grille, plateau);
-        complete(plateau.grille, plateau, interrupteur, &cases_decouverte);
+        //complete(plateau.grille, plateau, interrupteur, &cases_decouverte);
         printf("decouvert2 : %d\n", cases_decouverte);
         bord_fini(plateau.grille,plateau,interrupteur, &cases_decouverte);
         printf("decouvert3 : %d\n", cases_decouverte);
@@ -49,6 +54,20 @@ int main(int argc, char**argv){
     printf("FINI\n");
     if (verif( plateau.grille, plateau) == 1){
         printf("LA RESOLUTION EST BONNE\n");
+        printf("Voulez-vous sauvegarder ?\n0 : non\nautre : oui\n");
+        if(scanf("%d",&choix) != 1){
+            printf("erreur recuperation de données\n");
+            exit(EXIT_FAILURE);
+        }
+        if(choix != 0){
+            printf("Entrez nom de sauvegarde (128 caracteres max)\n");
+            if(scanf("%s",save) != 1){
+                printf("%s\n", save);
+                printf("erreur recuperation du fichier de sauvegarde\n");
+                exit(EXIT_FAILURE);
+            }
+            sauvegarde(plateau, save);
+        }
     }
     else{
         printf("LA RESOLUTION EST MAUVAISE\n");
